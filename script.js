@@ -9,6 +9,7 @@ function writePassword() {
   var chTypeNumb = 0;
   var typeYes = 0;
   var typeNo = 0;
+  password = ""
   //determin how many characterTypes are used.
   for (var i = 0; i < 4; i++) {
     chTypeNumb = chTypeNumb + characterType[i].required;
@@ -20,6 +21,7 @@ function writePassword() {
       typeNo += 1;
     }
   };
+
   //pick at least one choosed character type each
   for (var i = 0; i < typeYes; i++) {
     switch (i) {
@@ -55,14 +57,14 @@ function writePassword() {
       case characterType[3].seq - 1:
         password += pickSpecial();
         break;
-    }
+    };
   };
 
   console.log(password);
   //randomize the sequence of all the chararcters. 
   for (var i = 0; i < length1; i++) {
     debugger
-    var pickseq = Math.floor(Math.random() * password.length);
+    var pickseq = Math.floor(Math.random() * password.length);//what's here need to be changed
     console.log(pickseq);
     password2 = password2 + password.charAt(pickseq);
     password = password.substring(0, pickseq)+password.substring(pickseq+1,length1-i);
@@ -73,61 +75,61 @@ function writePassword() {
   return (password2);
 }  
 
-//function passwordLength() to ask for the leng of the password 
+//function passwordLength() to ask for the leng of the password  need to debug
 function passwordLength() {
   var pwLength = prompt("Please enter the length of the password. ");
   if (pwLength === null || pwLength === "") {
     passwordLength();
   } else {
-    pwLength = parseInt(pwLength);
-    if (pwLength >= 8 && pwLength <= 128) {
+    pwLength = Math.floor(pwLength);
+    if (pwLength > 7 && pwLength < 129) {
       window.alert("Generating a password with length of " + pwLength + ".");
       return pwLength;
     } else {
       window.alert('You did not enter a valid unmber. Please enter a number between 8 to 128.');
       passwordLength();
-    }
-  }
-}
+    };
+  };
+};
 
 
 //whether include certain type of characters.
 
-var cType = function() {
+function cType() {
   var characterType = [
     {
-      type:"lowercased",
+      type: "lowercased",
       required: 0,
-      seq:0,
+      seq: 0,
     },
     {
-      type:"UPPERCAED",
+      type: "UPPERCAED",
       required: 0,
-      seq:0,
+      seq: 0,
     },
     {
-      type:"numberic",
+      type: "numberic",
       required: 0,
-      seq:0,
+      seq: 0,
     },
     {
-      type:"special",
+      type: "special",
       required: 0,
-      seq:0,
+      seq: 0,
     }
-  ]
+  ];
   console.log(characterType);
-  var cTypeSum=0;
+  var cTypeSum = 0;
   console.log(characterType);
-  for (var i=0; i < characterType.length; i++){
+  for (var i = 0; i < characterType.length; i++) {
     if (window.confirm("Do you need " + characterType[i].type + " chararcters in the password?")) {
-      characterType[i].required = 1
+      characterType[i].required = 1;
     };
-      cTypeSum = cTypeSum + characterType[i].required;
-    
+    cTypeSum = cTypeSum + characterType[i].required;
+
   };
   console.log(cTypeSum);
-  if (cTypeSum == 0){
+  if (cTypeSum == 0) {
     window.alert("Please choose at lease one character type!");
     cType();
   } else {
@@ -155,8 +157,9 @@ function pickNumber() {
 }
 //function pick one special character
 function pickSpecial() {
-  const specialList =" !#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
+  const specialList ="!#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
   var pickSpecial1 = specialList.charAt(Math.floor(Math.random()*specialList.length));
+  return pickSpecial1;
 }
 
 
