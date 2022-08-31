@@ -1,7 +1,7 @@
 // Assignment code here
 function writePassword() {
   var length1 = passwordLength();
-  console.log(length1);
+  console.log("Your pass word length is " + length1);
   var characterType = cType();
   console.log(characterType);
   var password = "";
@@ -64,30 +64,39 @@ function writePassword() {
   //randomize the sequence of all the chararcters. 
   for (var i = 0; i < length1; i++) {
     debugger
-    var pickseq = Math.floor(Math.random() * password.length);//what's here need to be changed
+    var pickseq = Math.floor(Math.random() * password.length);
     console.log(pickseq);
     password2 = password2 + password.charAt(pickseq);
     password = password.substring(0, pickseq)+password.substring(pickseq+1,length1-i);
     console.log(password);
     console.log(password2);
   };
-  window.alert("Your auto-generated password is: " + password2);
-  return (password2);
+  // window.alert("Your auto-generated password is: " + password2);
+
+  var passwordText = document.querySelector("#password");
+
+  passwordText.value = password2;
 }  
 
 //function passwordLength() to ask for the leng of the password  need to debug
 function passwordLength() {
   var pwLength = prompt("Please enter the length of the password. ");
   if (pwLength === null || pwLength === "") {
-    passwordLength();
+    console.log("pwLength: "+ pwLength);
+    pwLength=passwordLength();
+    return pwLength;
   } else {
-    pwLength = Math.floor(pwLength);
+    pwLength = parseInt(pwLength);
     if (pwLength > 7 && pwLength < 129) {
-      window.alert("Generating a password with length of " + pwLength + ".");
-      return pwLength;
+      window.alert("Generating a password with length of " + pwLength + "."); 
+      console.log("pwlength89: " + pwLength);
+      pwLength = pwLength;
+      return pwLength;  //can't return the value from the second try.
     } else {
+      console.log("pwLength2: "+ pwLength);
       window.alert('You did not enter a valid unmber. Please enter a number between 8 to 128.');
-      passwordLength();
+      pwLength=passwordLength();
+      return pwLength;
     };
   };
 };
@@ -120,7 +129,6 @@ function cType() {
   ];
   console.log(characterType);
   var cTypeSum = 0;
-  console.log(characterType);
   for (var i = 0; i < characterType.length; i++) {
     if (window.confirm("Do you need " + characterType[i].type + " chararcters in the password?")) {
       characterType[i].required = 1;
@@ -131,7 +139,8 @@ function cType() {
   console.log(cTypeSum);
   if (cTypeSum == 0) {
     window.alert("Please choose at lease one character type!");
-    cType();
+    characterType=cType();
+    return characterType;
   } else {
     return characterType;
   };
