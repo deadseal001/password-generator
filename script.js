@@ -24,7 +24,7 @@ function writePassword() {
     }
   };
 
-  //pick at least one choosed character type each
+  //pick at least one chosen character type each
   for (var i = 0; i < typeYes; i++) {
     switch (i) {
       case characterType[0].seq - 1:
@@ -65,9 +65,9 @@ function writePassword() {
   console.log("all the letters with required length: "+ password);
   //randomize the sequence of all the chararcters. 
   for (var i = 0; i < length1; i++) {
-    debugger
+    // debugger
     var pickseq = Math.floor(Math.random() * password.length);
-    console.log(pickseq);
+    // console.log(pickseq);
     password2 = password2 + password.charAt(pickseq);
     password = password.substring(0, pickseq)+password.substring(pickseq+1,length1-i);
   };
