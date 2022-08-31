@@ -1,4 +1,6 @@
 // Assignment code here
+
+//main passwork generation function
 function writePassword() {
   var length1 = passwordLength();
   console.log("Your pass word length is " + length1);
@@ -10,7 +12,7 @@ function writePassword() {
   var typeYes = 0;
   var typeNo = 0;
   password = ""
-  //determin how many characterTypes are used.
+  //determin which characterTypes are used.
   for (var i = 0; i < 4; i++) {
     chTypeNumb = chTypeNumb + characterType[i].required;
     if (characterType[i].required == 1) {
@@ -39,7 +41,7 @@ function writePassword() {
         break;
     }
   };
-  console.log(password);
+  console.log("the first few characters with at least 1 type each:" + password);
 
   //choose all the other characters for the password.
   for (var i = 0; i < length1 - typeYes; i++) {
@@ -60,7 +62,7 @@ function writePassword() {
     };
   };
 
-  console.log(password);
+  console.log("all the letters with required length: "+ password);
   //randomize the sequence of all the chararcters. 
   for (var i = 0; i < length1; i++) {
     debugger
@@ -68,9 +70,8 @@ function writePassword() {
     console.log(pickseq);
     password2 = password2 + password.charAt(pickseq);
     password = password.substring(0, pickseq)+password.substring(pickseq+1,length1-i);
-    console.log(password);
-    console.log(password2);
   };
+  console.log("final password, which is randomized seq of password1: " + password2);
   // window.alert("Your auto-generated password is: " + password2);
 
   var passwordText = document.querySelector("#password");
@@ -176,14 +177,7 @@ function pickSpecial() {
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
-// Write password to the #password input
-// function writePassword() {
-//   var password = generatePassword();
-//   var passwordText = document.querySelector("#password");
 
-//   passwordText.value = password;
-
-// }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
